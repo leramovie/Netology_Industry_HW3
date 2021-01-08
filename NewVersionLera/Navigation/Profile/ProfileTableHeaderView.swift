@@ -76,9 +76,9 @@ class ProfileTableHeaderView: UIView {
         let button = UIButton(frame: CGRect(x: UIScreen.main.bounds.maxX - 30, y: 0, width: 15, height: 15))
         button.tintColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1).withAlphaComponent(0.1)
         button.sizeToFit()
-        button.setImage(UIImage(contentsOfFile: "closeIcon"), for: button.state)
+        button.setImage(UIImage(systemName: "multiply"), for: button.state)
         button.addTarget(self, action: #selector(closeAvatarPopup), for: .touchUpInside)
-        button.tintColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        button.tintColor = .systemGray3
 
         return button
     }()
@@ -87,6 +87,7 @@ class ProfileTableHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        setupViews()
         setupLayout()
 
     }
@@ -95,10 +96,15 @@ class ProfileTableHeaderView: UIView {
         fatalError("init[coder:] has not been implemented")
     }
     
-    private func setupLayout() {
+    private func setupViews() {
         
-        addSubviews(avatar, userName, showStatusButton, textField)
-
+        addSubviews(avatar)
+        addSubviews(userName)
+        addSubviews(showStatusButton)
+        addSubviews(textField)
+    }
+    
+    private func setupLayout() {
         
         let constraints = [
             avatar.topAnchor.constraint(equalTo: topAnchor, constant: 16),
@@ -151,72 +157,42 @@ class ProfileTableHeaderView: UIView {
         }
     }
     
-    private func checkAvatarWasTappedAlready() -> Bool  {
-
-        if self.backgroundAvatar.isHidden == true {
-            print("backgroundAvatar already added as subview and Close button was tapped")
-            return true
-        } else {
-            print("probably avatar haven't been opened never ever")
-            return false
-        }
-       
-    }
     
     @objc func tappedAvatar() {
-        
-       let avatarWasTappedInSession = checkAvatarWasTappedAlready()
     
-        if avatarWasTappedInSession == false {
-            UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: []) {
-                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1) { [self] in
-                 
-                    //Не удалось предотвратить реверс, поэтому добавлено новое значение фото
-                    let photoImage = avatar.image
-                    expandedPhoto = UIImageView(image: photoImage)
-                    
-                    addSubview(backgroundAvatar)
-                    backgroundAvatar.addSubview(expandedPhoto)
-                    backgroundAvatar.addSubview(closeAvatar)
-            
-                    expandedPhoto.center = backgroundAvatar.center
-                    expandedPhoto.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
-                    expandedPhoto.contentMode = .scaleAspectFit
-                    expandedPhoto.layer.masksToBounds = false
-                    expandedPhoto.layer.cornerRadius = 0
-                    expandedPhoto.layer.borderWidth = 0
-                }
+        UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: []) {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1) { [self] in
+             
+                //Не удалось предотвратить реверс, поэтому добавлено новое значение фото
+                let photoImage = avatar.image
+                expandedPhoto = UIImageView(image: photoImage)
                 
-            } completion: { finished in
-                
-                if finished == true {
-                    UIView.animateKeyframes(withDuration: 0.3, delay: 0.5) { [self] in
-                        print(finished)
-                        closeAvatar.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1).withAlphaComponent(1)
-                    }
-                } else {
-                    print("Анимация раскрытия картинки не сработала")
-                }
+                addSubview(backgroundAvatar)
+                backgroundAvatar.addSubview(expandedPhoto)
+                backgroundAvatar.addSubview(closeAvatar)
+        
+                expandedPhoto.center = backgroundAvatar.center
+                expandedPhoto.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+                expandedPhoto.contentMode = .scaleAspectFit
+                expandedPhoto.layer.masksToBounds = false
+                expandedPhoto.layer.cornerRadius = 0
+                expandedPhoto.layer.borderWidth = 0
             }
-        } else {
             
-            UIView.animate(withDuration: 0.5,
-                           animations: { [weak self] in
-                            self?.backgroundAvatar.alpha = 1.0
-                            self?.closeAvatar.alpha = 1.0
-                            self?.expandedPhoto.alpha = 1.0
-                
-                           }) { [weak self] _ in
-                            self?.backgroundAvatar.isHidden = false
-                            self?.closeAvatar.isHidden = false
-                            self?.expandedPhoto.isHidden = false
+        } completion: { finished in
+            
+            if finished == true {
+                UIView.animateKeyframes(withDuration: 0.3, delay: 0.5) { [self] in
+                    print(finished)
+                    closeAvatar.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1).withAlphaComponent(1)
+                }
+            } else {
+                print("Анимация раскрытия картинки не сработала")
             }
         }
-        
     }
 
 }
-
 
 
 extension ProfileTableHeaderView: UIGestureRecognizerDelegate {

@@ -10,6 +10,8 @@ import UIKit
 
 class PhotosViewController: UIViewController {
     
+
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -42,19 +44,6 @@ class PhotosViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
-    }
-    
-    func setupLayout() {
-        view.addSubviews(collectionView)
-        
-        let constraints = [
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ]
-        
-        NSLayoutConstraint.activate(constraints)
     }
 }
 
@@ -93,4 +82,18 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
         
 }
 
+private extension PhotosViewController {
+    func setupLayout() {
+        view.addSubview(collectionView)
+        
+        let constraints = [
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ]
+        
+        NSLayoutConstraint.activate(constraints)
+    }
+}
 

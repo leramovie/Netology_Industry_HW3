@@ -103,7 +103,9 @@ class LoginView: UIView {
     
     
     private func setupViews() {
-        addSubviews(iconVK, loginStackView, loginButton)
+        self.addSubviews(iconVK)
+        self.addSubviews(loginStackView)
+        self.addSubviews(loginButton)
         loginStackView.addArrangedSubview(loginTextField)
         loginStackView.addArrangedSubview(passwordTextField)
     }

@@ -83,7 +83,12 @@ class PostTableViewCell: UITableViewCell {
 //MARK: Layout
 private extension PostTableViewCell {
     func setupLayout() {
-        contentView.addSubviews(titleLabel, postImageView, desctiptionLabel, likesLabel, viewsLabel)
+        contentView.addSubviews(titleLabel)
+        contentView.addSubviews(postImageView)
+        contentView.addSubviews(desctiptionLabel)
+        contentView.addSubviews(likesLabel)
+        contentView.addSubviews(viewsLabel)
+
         
         let constraints = [
             
