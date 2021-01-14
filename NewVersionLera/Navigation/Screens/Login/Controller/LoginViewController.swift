@@ -9,10 +9,13 @@
 import UIKit
 
 @available(iOS 13.0, *)
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, LoginViewDelegate {
     
+    weak var authDelegate: LoginViewControllerDelegate?
+   
     private lazy var loginView: LoginView = {
         let loginView = LoginView()
+        loginView.backgroundColor = .white
         loginView.delegate = self
         return loginView
     }()
@@ -25,6 +28,7 @@ class LoginViewController: UIViewController {
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        scrollView.backgroundColor = .white
         scrollView.showsVerticalScrollIndicator = false
         scrollView.delegate = self
         return scrollView
@@ -62,12 +66,10 @@ class LoginViewController: UIViewController {
         }
     }
     
-    
     private func setupLayout() {
         
         view.addSubviews(scrollView)
-        scrollView.addSubviews(contentView)
-        contentView.addSubviews(loginView)
+        scrollView.addSubviews(contentView, loginView)
         
         let constraints = [
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -89,13 +91,30 @@ class LoginViewController: UIViewController {
         
         NSLayoutConstraint.activate(constraints)
     }
-}
+    
+    func didTapLoginButton(filledLogin: String, filledPassword: String) {    
+       
+        authDelegate?.checkLogin(filledLogin, completion: { (isLoginCorrect) in
+            if isLoginCorrect {
+                authDelegate?.checkPassword(filledPassword, completion: { (isPasswordCorrect) in
+                    if isPasswordCorrect {
+                        
+                        let storyboard1 = UIStoryboard.init(name: "Main", bundle: nil)
 
-@available(iOS 13.0, *)
-extension LoginViewController: LoginViewDelegate {
-    func didTapLoginButton() {
-        let profileViewController = storyboard?.instantiateViewController(identifier: "ProfileViewController") as! ProfileViewController
-        navigationController?.pushViewController(profileViewController, animated: true)
+                        guard let profileViewController = storyboard1.instantiateViewController(identifier: "ProfileViewController") as? ProfileViewController else {
+                            return
+                        }
+
+                        navigationController?.pushViewController(profileViewController, animated: true)
+
+                    } else {
+                        print ("Пароль не тот!")
+                    }
+                })
+            } else {
+                print ("Не сходятся логин/пасс")
+            }
+        })
     }
 }
 

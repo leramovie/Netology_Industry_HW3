@@ -157,7 +157,6 @@ class ProfileTableHeaderView: UIView {
         }
     }
     
-    
     @objc func tappedAvatar() {
     
         UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: []) {
@@ -193,7 +192,6 @@ class ProfileTableHeaderView: UIView {
     }
 
 }
-
 
 extension ProfileTableHeaderView: UIGestureRecognizerDelegate {
     
