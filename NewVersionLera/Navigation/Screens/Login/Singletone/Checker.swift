@@ -14,7 +14,7 @@ class Checker {
     private let password = "John"
     
     
-    static var shared: Checker = {
+    static let shared: Checker = {
         let instance = Checker()
         
         return instance
@@ -23,11 +23,11 @@ class Checker {
     private init() { }
     
     func isLoginCorrect(_ login: String) -> Bool {
-        return login == self.login
+        login == self.login
     }
     
     func isPasswordCorrect(_ password: String) -> Bool {
-        return password == self.password
+        password == self.password
     }
    
 }
@@ -35,6 +35,6 @@ class Checker {
 @available(iOS 13.0, *)
 extension Checker: NSCopying {
     func copy(with zone: NSZone? = nil) -> Any {
-        return self
+        self
     }
 }

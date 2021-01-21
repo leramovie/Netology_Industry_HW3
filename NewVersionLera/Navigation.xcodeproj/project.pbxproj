@@ -23,6 +23,9 @@
 		F9537B65253F1C18003AD1B0 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9537B64253F1C18003AD1B0 /* Storage.swift */; };
 		F9537B69253F5686003AD1B0 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9537B68253F5686003AD1B0 /* PostTableViewCell.swift */; };
 		F9537B6E253F8BE2003AD1B0 /* PostDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9537B6D253F8BE2003AD1B0 /* PostDetail.swift */; };
+		F95AB10025B70A5A006FFF57 /* FeedContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95AB0FF25B70A5A006FFF57 /* FeedContainerView.swift */; };
+		F95AB10525B78FA5006FFF57 /* PostPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95AB10425B78FA5006FFF57 /* PostPresenter.swift */; };
+		F95AB10C25B848B8006FFF57 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95AB10B25B848B8006FFF57 /* Coordinator.swift */; };
 		F994F08825ADA84700C7188D /* LoginViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F994F08725ADA84700C7188D /* LoginViewControllerDelegate.swift */; };
 		F994F09425ADBF6300C7188D /* LoginViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F994F09325ADBF6300C7188D /* LoginViewDelegate.swift */; };
 		F994F09A25ADC6EC00C7188D /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F994F09925ADC6EC00C7188D /* AuthManager.swift */; };
@@ -57,6 +60,9 @@
 		F9537B64253F1C18003AD1B0 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		F9537B68253F5686003AD1B0 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		F9537B6D253F8BE2003AD1B0 /* PostDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetail.swift; sourceTree = "<group>"; };
+		F95AB0FF25B70A5A006FFF57 /* FeedContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedContainerView.swift; sourceTree = "<group>"; };
+		F95AB10425B78FA5006FFF57 /* PostPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPresenter.swift; sourceTree = "<group>"; };
+		F95AB10B25B848B8006FFF57 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		F994F08725ADA84700C7188D /* LoginViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerDelegate.swift; sourceTree = "<group>"; };
 		F994F09325ADBF6300C7188D /* LoginViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewDelegate.swift; sourceTree = "<group>"; };
 		F994F09925ADC6EC00C7188D /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -104,18 +110,16 @@
 			children = (
 				060782B1250CE27700A87020 /* AppDelegate.swift */,
 				060782B3250CE27700A87020 /* SceneDelegate.swift */,
+				060782B7250CE27700A87020 /* Main.storyboard */,
+				F95AB10A25B8488B006FFF57 /* AppCoordinator */,
 				F994F08B25ADA85700C7188D /* Screens */,
 				F9537B6C253F8BD0003AD1B0 /* Model */,
 				F9537B63253F1C0A003AD1B0 /* Storage */,
 				F9537B5C253F1B56003AD1B0 /* Helpers */,
-				060782B7250CE27700A87020 /* Main.storyboard */,
+				F95AB11025B84B18006FFF57 /* Extensions */,
 				060782BA250CE27A00A87020 /* Assets.xcassets */,
 				060782BC250CE27A00A87020 /* LaunchScreen.storyboard */,
 				060782BF250CE27A00A87020 /* Info.plist */,
-				060782C9250CEE7200A87020 /* Post.swift */,
-				060782C5250CEB0A00A87020 /* InfoViewController.swift */,
-				060782C7250CEE5D00A87020 /* PostViewController.swift */,
-				F9CF8C86253F07CE0083278B /* UIImage+Alpha.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -142,14 +146,40 @@
 			isa = PBXGroup;
 			children = (
 				F9537B6D253F8BE2003AD1B0 /* PostDetail.swift */,
+				060782C9250CEE7200A87020 /* Post.swift */,
 				F9FB61A325457B8500F27CF1 /* Photo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
+		F95AB10A25B8488B006FFF57 /* AppCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				F95AB10B25B848B8006FFF57 /* Coordinator.swift */,
+			);
+			path = AppCoordinator;
+			sourceTree = "<group>";
+		};
+		F95AB10F25B84AFE006FFF57 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				060782C5250CEB0A00A87020 /* InfoViewController.swift */,
+			);
+			path = Info;
+			sourceTree = "<group>";
+		};
+		F95AB11025B84B18006FFF57 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F9CF8C86253F07CE0083278B /* UIImage+Alpha.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		F994F08B25ADA85700C7188D /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				F95AB10F25B84AFE006FFF57 /* Info */,
 				F994F09025ADA8CA00C7188D /* Post */,
 				F994F08D25ADA87D00C7188D /* Feed */,
 				F994F08C25ADA86300C7188D /* Login */,
@@ -174,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				060782B5250CE27700A87020 /* FeedViewController.swift */,
+				F95AB0FF25B70A5A006FFF57 /* FeedContainerView.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -181,6 +212,8 @@
 		F994F09025ADA8CA00C7188D /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				F95AB10425B78FA5006FFF57 /* PostPresenter.swift */,
+				060782C7250CEE5D00A87020 /* PostViewController.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -329,6 +362,7 @@
 				F9A675A7253B2A9D0038BB08 /* LoginViewController.swift in Sources */,
 				F91295B725408AE200BB1BB1 /* ProfileTableHeaderView.swift in Sources */,
 				F994F09A25ADC6EC00C7188D /* AuthManager.swift in Sources */,
+				F95AB10025B70A5A006FFF57 /* FeedContainerView.swift in Sources */,
 				060782B6250CE27700A87020 /* FeedViewController.swift in Sources */,
 				F946E5B0253C95FD003FAA10 /* Styles.swift in Sources */,
 				F994F08825ADA84700C7188D /* LoginViewControllerDelegate.swift in Sources */,
@@ -336,8 +370,10 @@
 				060782B2250CE27700A87020 /* AppDelegate.swift in Sources */,
 				060782C6250CEB0A00A87020 /* InfoViewController.swift in Sources */,
 				F9F2F933253071B200883B52 /* ProfileViewController.swift in Sources */,
+				F95AB10C25B848B8006FFF57 /* Coordinator.swift in Sources */,
 				F9FB61A725457BB600F27CF1 /* PhotoStorage.swift in Sources */,
 				060782CA250CEE7200A87020 /* Post.swift in Sources */,
+				F95AB10525B78FA5006FFF57 /* PostPresenter.swift in Sources */,
 				F9F2F9302530717A00883B52 /* ProfileHeaderView.swift in Sources */,
 				F9537B69253F5686003AD1B0 /* PostTableViewCell.swift in Sources */,
 				060782B4250CE27700A87020 /* SceneDelegate.swift in Sources */,

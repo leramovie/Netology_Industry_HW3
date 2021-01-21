@@ -1,69 +1,92 @@
-//
-//  ViewController.swift
-//  Navigation
-//
-//  Created by Artem Novichkov on 12.09.2020.
-//  Copyright © 2020 Artem Novichkov. All rights reserved.
-//
-
 import UIKit
 
+@available(iOS 13.0, *)
+
+protocol FeedViewOutput {
+  
+  var navigationController: UINavigationController? { get set }
+  
+  func showPost()
+}
+
 final class FeedViewController: UIViewController {
+
+    var output: FeedViewOutput?
+
     
-    let post: Post = Post(title: "Пост")
+//    let post: Post = Post(title: "Пост")
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        print(type(of: self), #function)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        print(type(of: self), #function)
-    }
+    private let feedContainerView: FeedContainerView = {
+        let feedView = FeedContainerView()
+        return feedView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(type(of: self), #function)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print(type(of: self), #function)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print(type(of: self), #function)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        print(type(of: self), #function)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        print(type(of: self), #function)
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        print(type(of: self), #function)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        print(type(of: self), #function)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "post" else {
-            return
+        
+        feedContainerView.onTapBlock = { [weak self] in
+              self?.output?.showPost()
+            
+            guard let postViewController = self?.storyboard?.instantiateViewController(identifier: "PostViewController") as? PostViewController else { return }
+            self?.navigationController?.pushViewController(postViewController, animated: true)
         }
-        guard let postViewController = segue.destination as? PostViewController else {
-            return
-        }
-        postViewController.post = post
+        
+        output?.navigationController = self.navigationController
+        
+        setupLayout()
     }
+    
+    //MARK: Properties from RayWenderlich
+    var backgroundTask: UIBackgroundTaskIdentifier = .invalid
+    var previous = NSDecimalNumber.one
+    var current = NSDecimalNumber.one
+    var position: UInt = 1
+    var updateTimer: Timer?
+    
+    func registerBackgroundTask() {
+      backgroundTask = UIApplication.shared.beginBackgroundTask { [weak self] in
+        self?.endBackgroundTask()
+      }
+      assert(backgroundTask != .invalid)
+    }
+      
+    func endBackgroundTask() {
+      print("Background task ended.")
+      UIApplication.shared.endBackgroundTask(backgroundTask)
+      backgroundTask = .invalid
+    }
+    
+    private func setupLayout() {
+        view.addSubviews(feedContainerView)
+        
+        let constraints = [
+            
+            feedContainerView.topAnchor.constraint(equalTo: view.topAnchor),
+            feedContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            feedContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            feedContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ]
+        NSLayoutConstraint.activate(constraints)
+    }
+    
+    
+    //MARK: Delegate methods
+    func didTapCreatePostButton() {
+        
+        feedContainerView.onTapBlock = { [weak self] in
+            
+            guard let postViewController = self?.storyboard?.instantiateViewController(identifier: "PostViewController") as? PostViewController else { return }
+            self?.navigationController?.pushViewController(postViewController, animated: true)
+        }
+     }
+    
+    func didTapOpenCreatedPostButton() {
+        
+        feedContainerView.onTapBlock = { [weak self] in
+        
+            guard let postViewController = self?.storyboard?.instantiateViewController(identifier: "PostViewController") as? PostViewController else { return }
+            self?.navigationController?.pushViewController(postViewController, animated: true)
+        }
+     }
 }
+

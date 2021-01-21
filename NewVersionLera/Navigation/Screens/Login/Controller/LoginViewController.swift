@@ -13,10 +13,9 @@ class LoginViewController: UIViewController, LoginViewDelegate {
     
     weak var authDelegate: LoginViewControllerDelegate?
    
-    private lazy var loginView: LoginView = {
+    private let loginView: LoginView = {
         let loginView = LoginView()
         loginView.backgroundColor = .white
-        loginView.delegate = self
         return loginView
     }()
     
@@ -38,6 +37,8 @@ class LoginViewController: UIViewController, LoginViewDelegate {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true
         setupLayout()
+        
+        loginView.delegate = self
         
         /// Keyboard observers
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)

@@ -14,7 +14,6 @@ import UIKit
 class LoginView: UIView {
     
     weak var delegate: LoginViewDelegate?
-    weak var authDelegate: LoginViewControllerDelegate?
     
     private let iconVK: UIImageView = {
         let imageView = UIImageView()
@@ -146,7 +145,6 @@ class LoginView: UIView {
     }
 }
 
-
 extension UIView {
 
   func roundCornersWithRadius(_ radius: CGFloat, top: Bool? = true, bottom: Bool? = true, shadowEnabled: Bool = true, shadowOffset: CGSize = CGSize(width: 4, height: 4), shadowRadius: CGFloat = CGFloat(4), shadowColor: CGColor? = UIColor.black.cgColor, shadowOpacity: Float = 0.7 ) {
@@ -173,7 +171,6 @@ extension UIView {
     layer.maskedCorners = maskedCorners
   }
 }
-
 
 extension UITextField {
     func setLeftPaddingPoints(_ amount:CGFloat){
