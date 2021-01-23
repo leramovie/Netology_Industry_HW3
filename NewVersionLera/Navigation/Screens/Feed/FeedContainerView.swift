@@ -10,7 +10,7 @@ import UIKit
 
 final class FeedContainerView: UIView {
     
-    var onTapBlock: (() -> Void)?
+    var onTap: (() -> Void)?
 
     //MARK: UI elements
     private let createNewPostButton: UIButton = {
@@ -71,10 +71,10 @@ final class FeedContainerView: UIView {
     //MARK: delegate methods
     
     @objc func createNewPostButtonTouched() {
-        onTapBlock?()
+        onTap?()
     }
     
     @objc func openCreatedPostButtonTapped() {
-        onTapBlock?()
+        onTap?()
     }
 }

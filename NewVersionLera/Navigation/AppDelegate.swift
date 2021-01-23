@@ -14,17 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let rootVC = storyboard.instantiateInitialViewController()
-        
-        self.window?.rootViewController = rootVC
-        self.window?.makeKeyAndVisible()
-        
+
         return true
     }
-
-    // MARK: UISceneSession Lifecycle
 
     @available(iOS 13.0, *)
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

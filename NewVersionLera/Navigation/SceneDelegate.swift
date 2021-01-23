@@ -18,7 +18,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
           
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let rootVC = storyboard.instantiateInitialViewController()
-
+        let presenter = PostPresenter()
+        
+        //MARK: To MAKSIM ABAKUMOV Вот здесь у меня непонятки
+        if let feedVC = storyboard.instantiateInitialViewController() as? FeedViewController {
+            
+            feedVC.output = presenter
+        }
+        
         window?.rootViewController = rootVC
         
         window?.makeKeyAndVisible()

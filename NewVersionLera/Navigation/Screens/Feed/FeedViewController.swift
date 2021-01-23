@@ -13,9 +13,7 @@ final class FeedViewController: UIViewController {
 
     var output: FeedViewOutput?
 
-    
-//    let post: Post = Post(title: "Пост")
-    
+        
     private let feedContainerView: FeedContainerView = {
         let feedView = FeedContainerView()
         return feedView
@@ -24,37 +22,15 @@ final class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        feedContainerView.onTapBlock = { [weak self] in
+        feedContainerView.onTap = { [weak self] in
               self?.output?.showPost()
-            
-            guard let postViewController = self?.storyboard?.instantiateViewController(identifier: "PostViewController") as? PostViewController else { return }
-            self?.navigationController?.pushViewController(postViewController, animated: true)
         }
         
         output?.navigationController = self.navigationController
         
         setupLayout()
     }
-    
-    //MARK: Properties from RayWenderlich
-    var backgroundTask: UIBackgroundTaskIdentifier = .invalid
-    var previous = NSDecimalNumber.one
-    var current = NSDecimalNumber.one
-    var position: UInt = 1
-    var updateTimer: Timer?
-    
-    func registerBackgroundTask() {
-      backgroundTask = UIApplication.shared.beginBackgroundTask { [weak self] in
-        self?.endBackgroundTask()
-      }
-      assert(backgroundTask != .invalid)
-    }
-      
-    func endBackgroundTask() {
-      print("Background task ended.")
-      UIApplication.shared.endBackgroundTask(backgroundTask)
-      backgroundTask = .invalid
-    }
+
     
     private func setupLayout() {
         view.addSubviews(feedContainerView)
@@ -70,23 +46,23 @@ final class FeedViewController: UIViewController {
     }
     
     
-    //MARK: Delegate methods
-    func didTapCreatePostButton() {
-        
-        feedContainerView.onTapBlock = { [weak self] in
-            
-            guard let postViewController = self?.storyboard?.instantiateViewController(identifier: "PostViewController") as? PostViewController else { return }
-            self?.navigationController?.pushViewController(postViewController, animated: true)
-        }
-     }
-    
-    func didTapOpenCreatedPostButton() {
-        
-        feedContainerView.onTapBlock = { [weak self] in
-        
-            guard let postViewController = self?.storyboard?.instantiateViewController(identifier: "PostViewController") as? PostViewController else { return }
-            self?.navigationController?.pushViewController(postViewController, animated: true)
-        }
-     }
+//    //MARK: Delegate methods
+//    func didTapCreatePostButton() {
+//
+//        feedContainerView.onTapBlock = { [weak self] in
+//
+//            guard let postViewController = self?.storyboard?.instantiateViewController(identifier: "PostViewController") as? PostViewController else { return }
+//            self?.navigationController?.pushViewController(postViewController, animated: true)
+//        }
+//     }
+//
+//    func didTapOpenCreatedPostButton() {
+//
+//        feedContainerView.onTapBlock = { [weak self] in
+//
+//            guard let postViewController = self?.storyboard?.instantiateViewController(identifier: "PostViewController") as? PostViewController else { return }
+//            self?.navigationController?.pushViewController(postViewController, animated: true)
+//        }
+//     }
 }
 
