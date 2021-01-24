@@ -2,6 +2,7 @@ import UIKit
 
 @available(iOS 13.0, *)
 
+
 protocol FeedViewOutput {
   
   var navigationController: UINavigationController? { get set }
@@ -9,10 +10,11 @@ protocol FeedViewOutput {
   func showPost()
 }
 
+
+
 final class FeedViewController: UIViewController {
 
     var output: FeedViewOutput?
-
         
     private let feedContainerView: FeedContainerView = {
         let feedView = FeedContainerView()
@@ -30,7 +32,6 @@ final class FeedViewController: UIViewController {
         
         setupLayout()
     }
-
     
     private func setupLayout() {
         view.addSubviews(feedContainerView)
@@ -44,25 +45,5 @@ final class FeedViewController: UIViewController {
         ]
         NSLayoutConstraint.activate(constraints)
     }
-    
-    
-//    //MARK: Delegate methods
-//    func didTapCreatePostButton() {
-//
-//        feedContainerView.onTapBlock = { [weak self] in
-//
-//            guard let postViewController = self?.storyboard?.instantiateViewController(identifier: "PostViewController") as? PostViewController else { return }
-//            self?.navigationController?.pushViewController(postViewController, animated: true)
-//        }
-//     }
-//
-//    func didTapOpenCreatedPostButton() {
-//
-//        feedContainerView.onTapBlock = { [weak self] in
-//
-//            guard let postViewController = self?.storyboard?.instantiateViewController(identifier: "PostViewController") as? PostViewController else { return }
-//            self?.navigationController?.pushViewController(postViewController, animated: true)
-//        }
-//     }
 }
 

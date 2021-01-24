@@ -16,18 +16,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     @available(iOS 13.0, *)
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
           
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.windowScene = windowScene
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let rootVC = storyboard.instantiateInitialViewController()
         let presenter = PostPresenter()
+    
+        guard let feedVC = storyboard.instantiateViewController(identifier: "FeedViewController") as? FeedViewController else { return }
         
         //MARK: To MAKSIM ABAKUMOV Вот здесь у меня непонятки
-        if let feedVC = storyboard.instantiateInitialViewController() as? FeedViewController {
-            
-            feedVC.output = presenter
-        }
-        
+        feedVC.output = presenter
+
         window?.rootViewController = rootVC
-        
         window?.makeKeyAndVisible()
     }
 

@@ -13,22 +13,25 @@ final class FeedContainerView: UIView {
     var onTap: (() -> Void)?
 
     //MARK: UI elements
-    private let createNewPostButton: UIButton = {
+    private lazy var createNewPostButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
         button.roundCornersWithRadius(5)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 15, weight: .regular)
+        button.addTarget(self, action: #selector(createNewPostButtonTouched), for: .touchUpInside)
         button.setTitle("Create new post", for: .normal)
+        button.isUserInteractionEnabled = true
         return button
     }()
     
-    private let showCreatedPostButton: UIButton = {
+    private lazy var showCreatedPostButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
         button.roundCornersWithRadius(5)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 15, weight: .regular)
+        button.addTarget(self, action: #selector(createNewPostButtonTouched), for: .touchUpInside)
         button.setTitle("Show created post", for: .normal)
         return button
     }()
@@ -37,10 +40,6 @@ final class FeedContainerView: UIView {
         super.init(frame: frame)
         
         setupLayout()
-        
-        //MARK: Handle of tap on buttons
-        createNewPostButton.addTarget(self, action: #selector(createNewPostButtonTouched), for: .touchUpInside)
-        showCreatedPostButton.addTarget(self, action: #selector(createNewPostButtonTouched), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
@@ -56,6 +55,7 @@ final class FeedContainerView: UIView {
             createNewPostButton.heightAnchor.constraint(equalToConstant: 50),
             createNewPostButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             createNewPostButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            //createNewPostButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -45),
 
             
             showCreatedPostButton.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -68,13 +68,12 @@ final class FeedContainerView: UIView {
         NSLayoutConstraint.activate(constraints)
     }
     
-    //MARK: delegate methods
     
-    @objc func createNewPostButtonTouched() {
+    @objc func createNewPostButtonTouched(sender:UIButton!) {
         onTap?()
     }
     
-    @objc func openCreatedPostButtonTapped() {
+    @objc func openCreatedPostButtonTapped(sender:UIButton!) {
         onTap?()
     }
 }

@@ -9,14 +9,11 @@
 import UIKit
 
 class PostPresenter: FeedViewOutput {
+    
+    var navigationController: UINavigationController?
   
-    let post = Post(title: "Post") 
-  
-  var navigationController: UINavigationController?
-  
-  func showPost() {
-    let postVC = PostViewController()
-    postVC.post = post
-    navigationController?.pushViewController(postVC, animated: true)
-  }
+      func showPost() {
+        let postVC = PostViewController()
+        navigationController?.pushViewController(postVC, animated: true)
+      }
 }
