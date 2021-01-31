@@ -3,8 +3,7 @@
 //  Navigation
 //
 //  Created by Valery Shel on 21.10.2020.
-//  Copyright © 2020 Artem Novichkov. All rights reserved.
-//
+
 
 import UIKit
 
@@ -157,7 +156,6 @@ class ProfileTableHeaderView: UIView {
         }
     }
     
-    
     @objc func tappedAvatar() {
     
         UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: []) {
@@ -193,7 +191,6 @@ class ProfileTableHeaderView: UIView {
     }
 
 }
-
 
 extension ProfileTableHeaderView: UIGestureRecognizerDelegate {
     

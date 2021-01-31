@@ -3,15 +3,12 @@
 //  Navigation
 //
 //  Created by Valery Shel on 24.10.2020.
-//  Copyright © 2020 Artem Novichkov. All rights reserved.
-//
+
 
 import UIKit
 
 class PhotosViewController: UIViewController {
-    
 
-    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -28,14 +25,12 @@ class PhotosViewController: UIViewController {
 
         return collectionView
     }()
-    
         
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Photo Gallery"
         setupLayout()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,7 +79,7 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 
 private extension PhotosViewController {
     func setupLayout() {
-        view.addSubview(collectionView)
+        view.addSubviews(collectionView)
         
         let constraints = [
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -92,7 +87,6 @@ private extension PhotosViewController {
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ]
-        
         NSLayoutConstraint.activate(constraints)
     }
 }

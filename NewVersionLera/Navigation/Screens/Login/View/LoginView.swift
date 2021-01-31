@@ -8,15 +8,13 @@
 
 import UIKit
 
-protocol LoginViewDelegate: AnyObject {
-    func didTapLoginButton()
-}
+
 
 @available(iOS 13.0, *)
 class LoginView: UIView {
     
     weak var delegate: LoginViewDelegate?
-
+    
     private let iconVK: UIImageView = {
         let imageView = UIImageView()
         imageView.image = #imageLiteral(resourceName: "logo")
@@ -25,7 +23,7 @@ class LoginView: UIView {
     }()
     
     
-    private let loginTextField: UITextField = {
+    let loginTextField: UITextField = {
         var loginTextField = UITextField()
         loginTextField.roundCornersWithRadius(10, top: true, bottom: false, shadowEnabled: false)
         loginTextField.placeholder = "Email or phone"
@@ -41,7 +39,7 @@ class LoginView: UIView {
         return loginTextField
     }()
     
-    private let passwordTextField:UITextField = {
+    let passwordTextField:UITextField = {
         var passwordTextField = UITextField()
         passwordTextField.roundCornersWithRadius(10, top: false, bottom: true, shadowEnabled: false)
         passwordTextField.placeholder = "Password"
@@ -129,14 +127,23 @@ class LoginView: UIView {
             loginButton.heightAnchor.constraint(equalToConstant: 50),
             loginButton.bottomAnchor.constraint(equalTo: bottomAnchor)
         ]
+        
         NSLayoutConstraint.activate(constraints)
     }
     
     @objc func loginButtonTapped() {
-        delegate?.didTapLoginButton()
+        
+        guard let loginFilled = loginTextField.text,
+              let passwordFilled = passwordTextField.text,
+              !loginFilled.isEmpty && !passwordFilled.isEmpty else {
+            
+            print("Нужно заполнить оба поля")
+            return
+        }
+        
+        delegate?.didTapLoginButton(filledLogin: loginFilled, filledPassword: passwordFilled)
     }
 }
-
 
 extension UIView {
 
@@ -164,7 +171,6 @@ extension UIView {
     layer.maskedCorners = maskedCorners
   }
 }
-
 
 extension UITextField {
     func setLeftPaddingPoints(_ amount:CGFloat){
