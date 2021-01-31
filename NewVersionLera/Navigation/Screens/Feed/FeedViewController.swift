@@ -2,21 +2,19 @@ import UIKit
 
 @available(iOS 13.0, *)
 
-
 protocol FeedViewOutput {
   
   var navigationController: UINavigationController? { get set }
-  
+    
   func showPost()
+    
 }
-
-
 
 final class FeedViewController: UIViewController {
 
     var output: FeedViewOutput?
         
-    private let feedContainerView: FeedContainerView = {
+    private lazy var feedContainerView: FeedContainerView = {
         let feedView = FeedContainerView()
         return feedView
     }()
@@ -25,13 +23,14 @@ final class FeedViewController: UIViewController {
         super.viewDidLoad()
         
         feedContainerView.onTap = { [weak self] in
-              self?.output?.showPost()
+            self?.output?.showPost()
         }
         
         output?.navigationController = self.navigationController
         
         setupLayout()
     }
+    
     
     private func setupLayout() {
         view.addSubviews(feedContainerView)
